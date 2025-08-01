@@ -371,20 +371,24 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 95724331183731322, guid: bcfcb1b16ebed974ea8244e270af8d4a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1996061924472238, guid: bcfcb1b16ebed974ea8244e270af8d4a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1178176805}
+      addedObject: {fileID: 1178176811}
   m_SourcePrefab: {fileID: 100100000, guid: bcfcb1b16ebed974ea8244e270af8d4a, type: 3}
 --- !u!1 &1178176804 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1996061924472238, guid: bcfcb1b16ebed974ea8244e270af8d4a, type: 3}
   m_PrefabInstance: {fileID: 1014995462}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1178176805
+--- !u!114 &1178176811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -393,14 +397,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1178176804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b6963c450a62949a9afa2a66e2475e, type: 3}
+  m_Script: {fileID: 11500000, guid: f5b8b8ff58cba3946b775b465c1fc715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 7400000, guid: cc0f4020635f62440b29170c066c665a, type: 3}
-  - {fileID: 7400000, guid: 450a1ca20cd71b94e9f0f9f79af205a0, type: 3}
-  - {fileID: 7400000, guid: 0631f3b803400a14cae0a228d92dd328, type: 3}
-  - {fileID: 7400000, guid: 38bd4a893323a2147a3fdca9f1cb7610, type: 3}
+  - clip: {fileID: 7400000, guid: d1bec9422646df5458401c6a885f03ef, type: 3}
+    x: 0
+    y: 0
+  - clip: {fileID: 7400000, guid: a1ce1b2ba18ea5c49b2e03500393c76e, type: 3}
+    x: 0
+    y: 1
+  - clip: {fileID: 7400000, guid: 9aaf0512da848ca41a6f17f522e016ec, type: 3}
+    x: 1
+    y: 1
+  - clip: {fileID: 7400000, guid: c9e5b5fd0223c154d956c65e72efb5b3, type: 3}
+    x: -1
+    y: 1
+  - clip: {fileID: 7400000, guid: d8c1cfa122068b24fbe295434cb37f7c, type: 3}
+    x: 0
+    y: -1
+  - clip: {fileID: 7400000, guid: faa1737d46d171f4e84a03df2b80ff8b, type: 3}
+    x: 1
+    y: -1
+  - clip: {fileID: 7400000, guid: 2ab883ccd0731b74e966724e75f17da0, type: 3}
+    x: -1
+    y: -1
+  - clip: {fileID: 7400000, guid: cc0f4020635f62440b29170c066c665a, type: 3}
+    x: -1
+    y: 0
+  - clip: {fileID: 7400000, guid: 72b9cf9a8d085d04baba651690198b70, type: 3}
+    x: 1
+    y: 0
+  BlendPosition: {x: 0, y: 0}
 --- !u!1 &1451624049
 GameObject:
   m_ObjectHideFlags: 0

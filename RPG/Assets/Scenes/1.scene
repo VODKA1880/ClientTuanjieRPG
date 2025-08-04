@@ -382,6 +382,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1996061924472238, guid: bcfcb1b16ebed974ea8244e270af8d4a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1178176811}
+    - targetCorrespondingSourceObject: {fileID: 1996061924472238, guid: bcfcb1b16ebed974ea8244e270af8d4a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1178176812}
   m_SourcePrefab: {fileID: 100100000, guid: bcfcb1b16ebed974ea8244e270af8d4a, type: 3}
 --- !u!1 &1178176804 stripped
 GameObject:
@@ -400,35 +403,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b8b8ff58cba3946b775b465c1fc715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips:
-  - clip: {fileID: 7400000, guid: d1bec9422646df5458401c6a885f03ef, type: 3}
-    x: 0
-    y: 0
-  - clip: {fileID: 7400000, guid: a1ce1b2ba18ea5c49b2e03500393c76e, type: 3}
-    x: 0
-    y: 1
-  - clip: {fileID: 7400000, guid: 9aaf0512da848ca41a6f17f522e016ec, type: 3}
-    x: 1
-    y: 1
-  - clip: {fileID: 7400000, guid: c9e5b5fd0223c154d956c65e72efb5b3, type: 3}
-    x: -1
-    y: 1
-  - clip: {fileID: 7400000, guid: d8c1cfa122068b24fbe295434cb37f7c, type: 3}
-    x: 0
-    y: -1
-  - clip: {fileID: 7400000, guid: faa1737d46d171f4e84a03df2b80ff8b, type: 3}
-    x: 1
-    y: -1
-  - clip: {fileID: 7400000, guid: 2ab883ccd0731b74e966724e75f17da0, type: 3}
-    x: -1
-    y: -1
-  - clip: {fileID: 7400000, guid: cc0f4020635f62440b29170c066c665a, type: 3}
-    x: -1
-    y: 0
-  - clip: {fileID: 7400000, guid: 72b9cf9a8d085d04baba651690198b70, type: 3}
-    x: 1
-    y: 0
-  BlendPosition: {x: 0, y: 0}
+  IdleBehaviourData:
+    IdleAnim:
+      clip: {fileID: 7400000, guid: d1bec9422646df5458401c6a885f03ef, type: 3}
+      enterTime: 0.5
+    IdleRandomAnims:
+    - clip: {fileID: 7400000, guid: 0631f3b803400a14cae0a228d92dd328, type: 3}
+      enterTime: 0.5
+    - clip: {fileID: 7400000, guid: 38bd4a893323a2147a3fdca9f1cb7610, type: 3}
+      enterTime: 0.5
+    - clip: {fileID: 7400000, guid: 3ef3d95cfc3c45541942be22c65dec69, type: 3}
+      enterTime: 0.5
+    RandomTime: 5
+--- !u!114 &1178176812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178176804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89718322d0d9ee40bbead99ef6f1c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1451624049
 GameObject:
   m_ObjectHideFlags: 0

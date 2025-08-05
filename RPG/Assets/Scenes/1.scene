@@ -415,6 +415,61 @@ MonoBehaviour:
     - clip: {fileID: 7400000, guid: 3ef3d95cfc3c45541942be22c65dec69, type: 3}
       enterTime: 0.5
     RandomTime: 5
+  WalkBehaviourData:
+    clips:
+    - clip:
+        clip: {fileID: 7400000, guid: 2ab883ccd0731b74e966724e75f17da0, type: 3}
+        enterTime: 0
+      x: -0.707
+      y: -0.707
+    - clip:
+        clip: {fileID: 7400000, guid: faa1737d46d171f4e84a03df2b80ff8b, type: 3}
+        enterTime: 0
+      x: 0.707
+      y: -0.707
+    - clip:
+        clip: {fileID: 7400000, guid: d8c1cfa122068b24fbe295434cb37f7c, type: 3}
+        enterTime: 0
+      x: 0
+      y: -1
+    - clip:
+        clip: {fileID: 7400000, guid: c9e5b5fd0223c154d956c65e72efb5b3, type: 3}
+        enterTime: 0
+      x: -0.5
+      y: 0.5
+    - clip:
+        clip: {fileID: 7400000, guid: 9aaf0512da848ca41a6f17f522e016ec, type: 3}
+        enterTime: 0
+      x: 0.707
+      y: 0.707
+    - clip:
+        clip: {fileID: 7400000, guid: a1ce1b2ba18ea5c49b2e03500393c76e, type: 3}
+        enterTime: 0
+      x: 0
+      y: 1
+    - clip:
+        clip: {fileID: 7400000, guid: cc0f4020635f62440b29170c066c665a, type: 3}
+        enterTime: 0
+      x: -1
+      y: 0
+    - clip:
+        clip: {fileID: 7400000, guid: 72b9cf9a8d085d04baba651690198b70, type: 3}
+        enterTime: 0
+      x: 1
+      y: 0
+    - clip:
+        clip: {fileID: 7400000, guid: d1bec9422646df5458401c6a885f03ef, type: 3}
+        enterTime: 0
+      x: 0
+      y: 0
+    - clip:
+        clip: {fileID: 7400000, guid: c9e5b5fd0223c154d956c65e72efb5b3, type: 3}
+        enterTime: 0
+      x: -0.707
+      y: 0.707
+    maxDirection: 0.4
+  blendValue: {x: 0, y: 0}
+  Y: 0
 --- !u!114 &1178176812
 MonoBehaviour:
   m_ObjectHideFlags: 0

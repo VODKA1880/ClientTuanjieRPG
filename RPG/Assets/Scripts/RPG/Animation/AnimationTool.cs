@@ -41,10 +41,10 @@ namespace RPG.Animation
             return behaviour;
         }
 
-        public static BlendTree2DBehaviour Init(this ScriptPlayable<BlendTree2DBehaviour> playable, PlayableGraph graph, Blend2DPlayableData[] datas)
+        public static BlendTree2DBehaviour Init(this ScriptPlayable<BlendTree2DBehaviour> playable, PlayableGraph graph, ref Blend2DData data)
         {
             var behaviour = playable.GetBehaviour();
-            behaviour.Init(graph, playable, datas);
+            behaviour.Init(graph, playable, ref data);
             return behaviour;
         }
 

@@ -1,17 +1,19 @@
+using RPG.Animation;
 using UnityEngine;
 
 namespace RPG.MainPlayer
 {
-    public class IdleState : StateBase
+    public class WalkState : StateBase
     {
-        public IdleState(StateMachine stateMachine) : base((int)StateId.Idle, "Idle", stateMachine)
+        public WalkState(StateMachine stateMachine) : base((int)StateId.Walk, "Walk", stateMachine)
         {
 
         }
 
+
         public override void Enter(int lastStateId, params object[] args)
         {
-            MainPlayerMono.AnimationMono.TransitTo(Animation.GraphInputType.Idle);
+            MainPlayerMono.AnimationMono.TransitTo(GraphInputType.Walk);
         }
 
         public override void Exit()
@@ -23,9 +25,9 @@ namespace RPG.MainPlayer
         {
             var inputX = Input.GetAxis("Horizontal");
             var inputY = Input.GetAxis("Vertical");
-            if (inputX != 0 || inputY != 0)
+            if (inputX == 0 && inputY == 0)
             {
-                StateMachine.ChangeState((int)StateId.Walk);
+                StateMachine.ChangeState((int)StateId.Idle);
             }
             else
             {

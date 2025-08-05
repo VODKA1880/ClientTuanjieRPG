@@ -11,14 +11,13 @@ namespace RPG.Animation.BaseBehaviour
     } // Clip,Mixer,Random
 
     [System.Serializable]
-    public struct Blend2DPlayableDataClip
+    public struct Blend2DClipData
     {
-        public AnimationClipData[] clips;
+        public AnimationClipData clip;
         public float x;
         public float y;
     } // Blend2D
 
-    [System.Serializable]
     public struct Blend2DPlayableData
     {
         public Playable playable;
@@ -31,5 +30,13 @@ namespace RPG.Animation.BaseBehaviour
             this.x = x;
             this.y = y;
         }
+    } // Blend2D
+
+    [System.Serializable]
+    public struct Blend2DData
+    {
+        public Blend2DClipData[] clips;
+        public Blend2DPlayableData[] playables;
+        public float maxDirection;
     } // Blend2D
 }

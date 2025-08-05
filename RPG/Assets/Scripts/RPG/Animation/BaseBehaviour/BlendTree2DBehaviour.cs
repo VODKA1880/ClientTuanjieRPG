@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
+using Common.CalcuateTool;
+using Mono.Cecil;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
@@ -11,32 +15,31 @@ namespace RPG.Animation.BaseBehaviour
 
         private ScriptPlayable<BlendTree2DBehaviour> playable;
         private AnimationMixerPlayable mixer;
-        private Blend2DPlayableData[] datas;
+        private Blend2DData data;
         private float curBlendX;
         private float curBlendY;
 
-        public void Init(PlayableGraph graph, ScriptPlayable<BlendTree2DBehaviour> playable, Blend2DPlayableDataClip dataClip)
-        {
-            var data = new Blend2DPlayableData[dataClip.clips.Length];
-            for (int i = 0; i < dataClip.clips.Length; i++)
-            {
-                var clipPlayable = ScriptPlayable<AnimationClipBehaviour>.Create(graph);
-                AnimationTool.Init(clipPlayable, graph, dataClip.clips[i]);
-                data[i] = new Blend2DPlayableData(clipPlayable, dataClip.x, dataClip.y);
-            }
-            Init(graph, playable, data);
-        }
-
-        public void Init(PlayableGraph graph, ScriptPlayable<BlendTree2DBehaviour> playable, Blend2DPlayableData[] datas)
+        public void Init(PlayableGraph graph, ScriptPlayable<BlendTree2DBehaviour> playable, ref Blend2DData data)
         {
             Init(graph);
             this.playable = playable;
-            this.datas = datas;
+            this.data = data;
 
-            mixer = AnimationMixerPlayable.Create(graph, datas.Length);
-            for (int i = 0; i < datas.Length; i++)
+            if (this.data.playables == null || this.data.playables.Length == 0)
             {
-                graph.Connect(datas[i].playable, 0, mixer, i);
+                this.data.playables = new Blend2DPlayableData[this.data.clips.Length];
+                for (int i = 0; i < this.data.clips.Length; i++)
+                {
+                    var clipPlayable = ScriptPlayable<AnimationClipBehaviour>.Create(graph);
+                    AnimationTool.Init(clipPlayable, graph, this.data.clips[i].clip);
+                    this.data.playables[i] = new Blend2DPlayableData(clipPlayable, this.data.clips[i].x, this.data.clips[i].y);
+                }
+            }
+
+            mixer = AnimationMixerPlayable.Create(graph, this.data.playables.Length);
+            for (int i = 0; i < this.data.playables.Length; i++)
+            {
+                graph.Connect(this.data.playables[i].playable, 0, mixer, i);
             }
             playable.AddInput(mixer, 0, 1.0f);
             Disable();
@@ -81,39 +84,74 @@ namespace RPG.Animation.BaseBehaviour
             UpdateWeights();
         }
 
-        private void UpdateWeights()
+        public float GetBlendX()
         {
-            float allWeight = 0f;
-            for (int i = 0; i < datas.Length; i++)
-            {
-                var weight = CalculateWeight(datas[i].x, datas[i].y);
-                mixer.SetInputWeight(i, weight);
-                allWeight += weight;
-            }
-            Debug.Log(allWeight);
+            return curBlendX;
         }
 
-        private float CalculateWeight(float clipX, float clipY)
+        public float GetBlendY()
         {
-            float dx = clipX - curBlendX;
-            float dy = clipY - curBlendY;
-            float distance = Mathf.Sqrt(dx * dx + dy * dy);
-            if (distance < 0.01f)
+            return curBlendY;
+        }
+
+        private void UpdateWeights()
+        {
+            var disCache = new float[data.playables.Length];
+            var total = 0f;
+            for (int i = 0; i < data.playables.Length; i++)
             {
-                return 1f;
+                var clipX = data.playables[i].x;
+                var clipY = data.playables[i].y;
+                var dis = CalculateDis(clipX, clipY);
+                if (dis < data.maxDirection)
+                {
+                    disCache[i] = dis;
+                    total += dis;
+                }
+                else
+                {
+                    disCache[i] = data.maxDirection;
+                }
             }
-            return Mathf.Max(0f, 1f - distance);
+
+            for (int i = 0; i < data.playables.Length; i++)
+            {
+                var dis = disCache[i];
+                if (dis < data.maxDirection)
+                {
+                    if (dis == total)
+                    {
+                        mixer.SetInputWeight(i, 1);
+
+                    }
+                    else
+                    {
+                        var weight = 1 - dis / total;
+                        mixer.SetInputWeight(i, weight);
+                    }
+                }
+                else
+                {
+                    mixer.SetInputWeight(i, 0f);
+                }
+            }
+        }
+
+        private float CalculateDis(float clipX, float clipY)
+        {
+            return Vector2.Distance(new Vector2(clipX, clipY), new Vector2(curBlendX, curBlendY));
         }
 
         public int AddInput(Blend2DPlayableData data)
         {
-            var newDatas = new Blend2DPlayableData[datas.Length + 1];
-            for (int i = 0; i < datas.Length; i++)
+
+            var newDatas = new Blend2DPlayableData[this.data.playables.Length + 1];
+            for (int i = 0; i < this.data.playables.Length; i++)
             {
-                newDatas[i] = datas[i];
+                newDatas[i] = this.data.playables[i];
             }
-            newDatas[datas.Length] = data;
-            datas = newDatas;
+            newDatas[this.data.playables.Length] = data;
+            this.data.playables = newDatas;
 
             var idx = mixer.AddInput(data.playable, 0);
             return idx;

@@ -1,28 +1,39 @@
 using RPG.Animation;
-using UnityEngine;
+using RPG.Input;
+using RPG.Movement;
+using RPG.StateMachine;
+using RPG.Character;
+using Unity.VisualScripting;
 
 namespace RPG.MainPlayer
 {
-    public class MainPlayerMono : MonoBehaviour
+    public partial class MainPlayerMono : CharacterMono
     {
-        public StateMachine StateMachine { get; private set; }
-        public AnimationMono AnimationMono { get; private set; }
         private void Awake()
         {
-            StateMachine = new StateMachine(this);
-            StateMachine.AddState(new IdleState(StateMachine));
-            StateMachine.AddState(new WalkState(StateMachine));
-            AnimationMono = GetComponent<AnimationMono>();
+            StateMachineMono.AddComponent<StateMachineMono>();
+            MovementMono = gameObject.AddComponent<MovementMono>();
+            // AnimationMono = gameObject.AddComponent<AnimationMono>();
+            InputMono = gameObject.AddComponent<InputMono>();
+            InitComponents();
+        }
+
+        private void InitComponents()
+        {
+            var stateMachine = new StateMachine();
+            StateMachineMono.SetStateMachine(stateMachine);
+            StateMachineMono.AddState(new IdleState(this));
+            StateMachineMono.AddState(new WalkState(this));
         }
 
         private void Start()
         {
-            StateMachine.ChangeState((int)StateId.Idle);
+            StateMachineMono.ChangeState((int)StateId.Idle);
         }
 
         private void Update()
         {
-            StateMachine.Update();
+
         }
     }
 }

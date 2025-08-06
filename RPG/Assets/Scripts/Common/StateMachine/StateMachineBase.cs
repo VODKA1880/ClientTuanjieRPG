@@ -6,6 +6,14 @@ namespace Common.StateMachine
     {
         private int curStateId = -1;
         public int CurStateId => curStateId;
+        public string CurStateName
+        {
+            get
+            {
+                if (curStateId < 0 || !states.ContainsKey(curStateId)) return string.Empty;
+                return states[curStateId].Name;
+            }
+        }
         private int lastStateId = -1;
         private Dictionary<int, StateBase> states = new Dictionary<int, StateBase>();
         public void AddState(StateBase state)
@@ -40,6 +48,20 @@ namespace Common.StateMachine
             if (states.Count == 0) return;
             if (curStateId < 0 || !states.ContainsKey(curStateId)) return;
             states[curStateId].Update();
+        }
+
+        public void FixedUpdate()
+        {
+            if (states.Count == 0) return;
+            if (curStateId < 0 || !states.ContainsKey(curStateId)) return;
+            states[curStateId].FixedUpdate();
+        }
+
+        public void LateUpdate()
+        {
+            if (states.Count == 0) return;
+            if (curStateId < 0 || !states.ContainsKey(curStateId)) return;
+            states[curStateId].LateUpdate();
         }
 
         public void Destroy()
